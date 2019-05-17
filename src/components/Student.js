@@ -6,9 +6,11 @@ import * as appActions from '../store/actions';
 class Student extends Component
 {
     render () {
-        const { student, actions } = this.props;
+        const { student, actions, displayRating, baseRating } = this.props;
         const { name, rating } = student;
         const { incrementRating, decrementRating } = actions;
+
+        const note = parseInt(rating) + (parseInt(baseRating) || 0);
 
         return (
             <div className="row">
@@ -16,7 +18,7 @@ class Student extends Component
                     {name}
                 </div>
                 <div className="col-3 align-self-center">
-                    <span className="badge badge-primary badge-pill">rating: {rating}</span>
+                    {displayRating && <span className="badge badge-primary badge-pill">note: {note}</span>}
                 </div>
                 <div className="col-4 btn-group text-right">
                     <button className="btn btn-small btn-outline-primary" onClick={() => incrementRating(student)}>
